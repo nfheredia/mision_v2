@@ -1,23 +1,23 @@
-module Api::V1
+module Api::v1
   class UsersController < ApplicationController
     def index
-      @users = Usuario.order('created_at DESC')
+      @users = User.all
       render json: @users
     end
 
     def create
-      @user = Usuario.create(user_params)
+      @user = User.create(user_params)
       render json: @user
     end
 
     def update
-      @user = Usuario.find(params[:id])
+      @user = User.find(params[:id])
       @user.update_attributes(user_params)
       render json: @user
     end
 
     def destroy
-      @user = Usuario.find(params[:id])
+      @user = User.find(params[:id])
       if @user.destroy
         head :no_content, status: :ok
       else
